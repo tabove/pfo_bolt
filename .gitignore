@@ -1,0 +1,9 @@
+# Nodeモジュールの除外
+node_modules/
+
+# Next.js のビルドファイル
+.next/
+
+# OS関連の一時ファイル
+.DS_Store
+Thumbs.db
