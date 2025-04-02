@@ -1,19 +1,20 @@
 import './globals.css';
 import type{ Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider} from '@/theme-provider';
-import { Analutics } from '@/components/analytics';
+import { ThemeProvider} from '@/components/theme-provider';
+import { Analytics } from '@/components/analytics';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-const inter = Inter({ subsets: ['Latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Portfolio | Your name',
-    description: 'Software Engineer Portfolio showcasing projects and skills',
+    title: 'Portfolio | Takashi Hirano',
+    description: 'Webデザイナー&エンジニア「Takashi Hirano」のポートフォリオサイト',
+    metadataBase: new URL('http://localhost:3000'),
     openGraph: {
-        title: 'Portfolio | Your Name',
-        description: 'Software Engineer Portfolio showcasing projects and skills',
+        title: 'Portfolio | Takashi Hirano',
+        description: 'Webデザイナー&エンジニア「Takashi Hirano」のポートフォリオサイト',
         type: 'website',
         url: 'https://your-portfolio.com',
     } ,

@@ -4,14 +4,14 @@ import { Work } from "@/components/sections/work";
 import { Skills } from "@/components/sections/skills";
 import { Contact } from "@/components/sections/contact";
 
-export default function Home(){
-    return(
-        <>
-            <Hero />
-            <About />
-            <Work />
-            <Skills />
-            <Contact />
-        </>
-    )
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Work />
+      <Skills />
+      <Contact />
+    </>
+  );
 }
