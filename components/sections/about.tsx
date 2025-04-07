@@ -28,7 +28,7 @@ export function About() {
            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] lg:aspect-[3/4]">
               <Image
-                src="/IMG_prof.JPG"
+                src="public/img_prof.JPG"
                 alt="プロフィール画像"
                 fill
                 className="object-cover rounded-2xl"
@@ -93,7 +93,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">料理</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                 飲食店の経験から料理をすることが好きで、時短で美味しい料理を作るのが得意です。
+                 飲食店の経験から料理をすることが好きで、時短も出来てかつ美味しい料理を作るのが得意です。
                 </p>
               </div>
 
@@ -102,9 +102,9 @@ export function About() {
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
                   <Baby className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white">おでかけ</h4>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white">外出</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  休みの日は、娘と一緒に外へお出かけしたり遊びにいくことも好きです。
+                  休みの日は、娘や家族一緒に外へお出かけしています！
                 </p>
               </div>
 
@@ -115,7 +115,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">ゲーム</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  PlayStationやNintendoSwitch、またスマートフォンのゲーム等をプレイすることが大好きです。
+                  PlayStationやNintendoSwitch、またスマートフォンのゲーム等幅広くプレイしています。
                 </p>
               </div>
 
@@ -137,7 +137,8 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">読書</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  技術系の書籍や資格取得の本、またマーケティングの本を読んだりしています。漫画を読むのも大好きです！
+                  技術系の書籍や、マーケティングの本を読むのが好きです。
+                  漫画を読むのも大好きです！
                 </p>
               </div>
             </div>

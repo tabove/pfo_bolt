@@ -91,7 +91,7 @@ export function Hero() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mt-8 text-sm text-gray-500 dark:text-gray-400"
           >
-            技術に触れることが楽しいと思えるようなワクワク感を常に忘れないように心がけています。
+            日々進化を続ける様々な技術に触れた時の楽しむ気持ちを常に忘れないように心がけています。
           </motion.div>
 
           <div className="mt-10 flex items-center justify-center gap-x-6">
