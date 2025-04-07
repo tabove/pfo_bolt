@@ -8,17 +8,27 @@ pnpm-debug.log*
 # Next.js のビルドファイル
 .next/
 out/
+dist/
 *.log
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# 環境変数系（）
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # OS/エディタの不要なファイル
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-
-# 環境変数系（重要！）
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
