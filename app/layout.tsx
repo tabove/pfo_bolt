@@ -5,6 +5,7 @@ import { ThemeProvider} from '@/components/theme-provider';
 import { Analytics } from '@/components/analytics';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { LoadingScreen } from '@/components/loading-screen';
 
 const inter = Inter({ subsets: ['latin'] });
 
