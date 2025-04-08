@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const projects = [
     {
-        title: "在庫管理システム",
+        title: "在庫管理システム(仮)",
         description: "webアプリケーションを使用した基本的な在庫管理システム",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
         tags: ["Java", "JavaScript", "Servlet", "jsp"],
