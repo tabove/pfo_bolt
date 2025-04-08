@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 
 export function LoadingScreen() {
@@ -46,4 +45,3 @@ export function LoadingScreen() {
     </motion.div>
   );
 }
-export const inter = Inter({ subsets: ['latin'] });
