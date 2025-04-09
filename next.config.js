@@ -13,6 +13,10 @@ const nextConfig = {
       }
     ]
   },
+  // スクロール位置の復元を無効化
+  experimental: {
+    scrollRestoration: false
+  }
 };
 
 module.exports = nextConfig;

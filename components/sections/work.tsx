@@ -10,26 +10,26 @@ import Image from "next/image";
 
 const projects = [
     {
+        title: "My Portfolio",
+        description: "自身で学習した技術を駆使したポートフォリオサイト",
+        image: `${process.env.NEXT_PUBLIC_BASE_URL || ''}/project_one.png`,
+        tags: ["React/Next.js", "Node", "TypeScript", "TailwindCSS"],
+        githubUrl: "https://github.com/tabove/pfo_bolt.git",
+        liveUrl: "https://portfolio-tabove.vercel.app/",
+    },
+    {
         title: "在庫管理システム(仮)",
         description: "webアプリケーションを使用した基本的な在庫管理システム",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        tags: ["Java", "JavaScript", "Servlet", "jsp"],
+        tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
         githubUrl: "https://github.com/tabove/InventoryApp.git",
         liveUrl: "https://project-one.com",
     },
     {
-        title: "My Portfolio",
-        description: "自身で学習した技術を駆使したポートフォリオサイト",
+        title: "Movie Compass(ムビコン)※鋭意制作中",
+        description: "現在地、観たい作品などの情報を基に様々な指標を提案するアプリケーション",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        tags: ["React/Next.js", "Node", "TypeScript", "TailwindCSS"],
-        githubUrl: "https://github.com/tabove/pfo_bolt.git",
-        liveUrl: "https://pfo-bolt-git-master-taboves-projects.vercel.app/",
-    },
-    {
-        title: "チーム開発(鋭意制作中)",
-        description: "team development",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
-        tags: ["Python", "Django", "React", ""],
+        tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
         githubUrl: "https://github.com/yourusername/project-three",
         liveUrl: "https://project-three.com",
       },
