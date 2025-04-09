@@ -9,13 +9,9 @@ pnpm-debug.log*
 .next/
 out/
 dist/
-*.log
 
-# macOS
-.DS_Store
-
-# VS Code
-.vscode/
+# Vercel
+.vercel/
 
 # Logs
 *.log

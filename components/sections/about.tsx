@@ -83,7 +83,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">プログラミング</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  現在学習しているJava/SQL/Webアプリケーションの復習や、学んだ内容を基にしたプログラムの作成などを行っています。
+                  現在学習しているJava/RDBMS/Webアプリケーションの復習や、学んだ内容を基にしたプログラムの作成などを行っています。
                 </p>
               </div>
 
@@ -94,7 +94,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">料理</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                 飲食店の経験から料理をすることが好きで、時短も出来てかつ美味しい料理を作るのが得意です。
+                 飲食店の経験から料理が好きで、時短が出来てかつ美味しい料理を作る事に自身があります！
                 </p>
               </div>
 
@@ -105,7 +105,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">外出</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  休みの日は、娘や家族一緒に外へお出かけしています！
+                  休みの日は、娘や家族一緒に外へお出かけしています🚗
                 </p>
               </div>
 
@@ -116,7 +116,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">ゲーム</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  PlayStationやNintendoSwitch、またスマートフォンのゲーム等幅広くプレイしています。
+                  PlayStationやNintendoSwitch、またスマートフォンのゲーム等も幅広くプレイしています。
                 </p>
               </div>
 
@@ -127,7 +127,7 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">音楽鑑賞</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  J-pop、J-rock、その他インストルメンタル系の音楽を聴くことが好きで、野外フェスに行くことが毎年の楽しみです。
+                  J-rock、またインストルメンタル系の音楽が好きで、野外フェスに行くことが毎年の楽しみです。
                 </p>
               </div>
 
