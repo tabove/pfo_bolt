@@ -5,19 +5,19 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@/components/analytics';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { LoadingScreen } from '../components/loading-screen';
+import { LoadingScreen } from '@/components/loading-screen';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Portfolio | Takashi Hirano',
     description: 'Webデザイナー&エンジニア「Takashi Hirano」のポートフォリオサイト',
-    metadataBase: new URL('http://localhost:3000'),
+    metadataBase: new URL('https://portfolio-tabove.vercel.app/'),
     openGraph: {
         title: 'Portfolio | Takashi Hirano',
         description: 'Webデザイナー&エンジニア「Takashi Hirano」のポートフォリオサイト',
         type: 'website',
-        url: 'https://your-portfolio.com',
+        url: 'https://portfolio-tabove.vercel.app/',
     } ,
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
     children: React.ReactNode;
   }) {
     return (
-      <html lang="en" suppressHydrationWarning>
+      <html lang="ja" suppressHydrationWarning>
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>

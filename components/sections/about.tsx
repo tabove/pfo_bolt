@@ -138,8 +138,8 @@ export function About() {
                 </div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white">読書</h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  技術系の書籍や、マーケティングの本を読むのが好きです。
-                  漫画を読むのも大好きです！
+                  技術系の書籍や、マーケティングの本から新しい事を学ぶことが好きです。
+                  …漫画を読むのも大好きです！
                 </p>
               </div>
             </div>
