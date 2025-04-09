@@ -73,10 +73,10 @@ export function Hero() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white mb-6">
-            <span className="text-green-600 dark:text-green-400">エンジニア</span>として
+            <span className="text-green-600 dark:text-green-400">Welcome</span>to
             <br className="sm:hidden" />
-            <span className="text-green-600 dark:text-green-400">学び</span>と
-            <span className="text-green-600 dark:text-green-400">創造</span>を
+            <span className="text-green-600 dark:text-green-400">Takashi's</span>
+            <span className="text-green-600 dark:text-green-400">Portfolio</span>
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
