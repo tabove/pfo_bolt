@@ -13,13 +13,13 @@ export function Footer() {
             <span className="sr-only">GitHub</span>
             <Github className="h-6 w-6" />
           </Link>
-          <Link
+          {/* <Link
             href="https://linkedin.com/in/yourusername"
             className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
           >
             <span className="sr-only">LinkedIn</span>
             <Linkedin className="h-6 w-6" />
-          </Link>
+          </Link> */}
           <Link
             href="https://x.com/engineerTabo3"
             className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
