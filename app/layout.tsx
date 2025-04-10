@@ -5,9 +5,20 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@/components/analytics';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { LoadingScreen } from '@/components/loading-screen';
+import { Noto_Serif_JP } from 'next/font/google';
+import dynamic from 'next/dynamic';
+
+const LoadingScreen = dynamic(() => import('@/components/loading-screen'), {
+  ssr: false,
+});
 
 const inter = Inter({ subsets: ['latin'] });
+const notoSansJP = Noto_Serif_JP({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-serif-jp',
+});
 
 export const metadata: Metadata = {
     title: 'Portfolio | Takashi Hirano',
@@ -31,8 +42,9 @@ export default function RootLayout({
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>
-        <body className={inter.className}>
+        <body className={`${inter.className} ${notoSansJP.variable}`}>
           <ThemeProvider attribute="class" defaultTheme="light">
+          <LoadingScreen />
             <Header />
             <main className="min-h-screen">{children}</main>
             <Footer />

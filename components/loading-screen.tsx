@@ -1,9 +1,10 @@
+// loading-screen.tsx
 "use client";
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export function LoadingScreen() {
+function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
@@ -45,3 +46,5 @@ export function LoadingScreen() {
     </motion.div>
   );
 }
+
+export default LoadingScreen;
