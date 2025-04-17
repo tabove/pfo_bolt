@@ -148,15 +148,12 @@ const certifications = [
     title: "Javaプログラミング能力認定試験 2級",
     issuer: "サーティファイ 情報処理能力検定",
     issueDate: "2025",
+    image: {
+      src: "public\sikaku_java.png",
+      width: 600,
+      height: 600,
+    },
     badgeUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
-    verificationUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
-  },
-  {
-    title: "Microsoft Azure Fundamentals",
-    issuer: "Microsoft",
-    issueDate: "2024",
-    badgeUrl: "https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
-    verificationUrl: "https://www.credly.com/badges/example",
   },
   // 必要に応じて資格を追加
 ];
