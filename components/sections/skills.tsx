@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code2, Palette, Server, Terminal, Award, Check } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
 import Image from "next/image"; 
 
 const skillCategories = [
@@ -148,11 +147,7 @@ const certifications = [
     title: "Javaプログラミング能力認定試験 2級",
     issuer: "サーティファイ 情報処理能力検定",
     issueDate: "2025",
-    image: {
-      src: "public\sikaku_java.png",
-      width: 600,
-      height: 600,
-    },
+    imageUrl: "https://www.openbadge-global.com/api/v1/image/assertion/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
     badgeUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
   },
   // 必要に応じて資格を追加
@@ -181,7 +176,7 @@ export function Skills() {
           </h2>
           
           {/* スキルグリッド */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-16">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {skillCategories.map((category, index) => (
               <Card key={index}>
                 <CardContent className="pt-6">
@@ -230,21 +225,22 @@ export function Skills() {
               {certifications.map((cert, index) => (
                 <motion.a
                   key={index}
-                  href={cert.verificationUrl}
+                  href={cert.badgeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group"
+                  className="group block"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="p-6">
-                      <div className="relative w-full aspect-square mb-4">
-                        <Image
-                          src={cert.badgeUrl}
-                          alt={cert.title}
-                          fill
-                          className="object-contain"
+                      <div className="relative w-full aspect-square mb-4 rounded-lg overflow-hidden">
+                      <Image
+                           src={cert.imageUrl}
+                           alt={cert.title}
+                           width={340}
+                           height={340}
+                           className="object-contain transform group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
@@ -254,7 +250,7 @@ export function Skills() {
                         {cert.issuer}
                       </p>
                       <p className="text-sm text-gray-500 dark:text-gray-500">
-                        Issued {cert.issueDate}
+                        取得年 {cert.issueDate}
                       </p>
                     </CardContent>
                   </Card>
