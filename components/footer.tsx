@@ -18,7 +18,7 @@ export function Footer() {
             className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
           >
             <span className="sr-only">LinkedIn</span>
-            <Linkedin className="h-6 w-6" />
+            <Linkedin className="h-6 w-6" />  
           </Link> */}
           <Link
             href="https://x.com/engineerTabo3"

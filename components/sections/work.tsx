@@ -27,10 +27,10 @@ const projects = [
     },
     {
         title: "Movie Compass(ムビコン)※鋭意制作中",
-        description: "現在地、観たい作品などの情報を基に様々な指標を提案するアプリケーション",
+        description: "スクールチーム制作、今観たいを叶える映画情報検索アプリケーション",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
         tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
-        githubUrl: "https://github.com/yourusername/project-three",
+        githubUrl: "https://github.com/tabove/moviecompass.git",
         liveUrl: "https://project-three.com",
       },
     ];

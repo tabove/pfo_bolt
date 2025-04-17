@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Code2, Palette, Server, Terminal, Check } from "lucide-react";
+import { Code2, Palette, Server, Terminal, Award, Check } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import Image from "next/image"; 
 
 const skillCategories = [
   {
@@ -33,7 +35,7 @@ const skillCategories = [
         details: [
           "Tailwind CSSとCSS-in-JS",
           "レスポンシブデザインパターン",
-          "CSS GridとFlexbox",
+          "CSS GridとFlexboxの活用",
           "アニメーションとトランジション",
         ],
       },
@@ -89,7 +91,7 @@ const skillCategories = [
         name: "デザイン原則",
         details: [
           "ユーザビリティの追求",
-          "アクセシビリティ（WCAG）",
+          "アクセシビリティの考慮",
           "レスポンシブデザイン",
           "レイアウトとタイポグラフィ",
         ],
@@ -141,6 +143,24 @@ const skillCategories = [
   },
 ];
 
+const certifications = [
+  {
+    title: "Javaプログラミング能力認定試験 2級",
+    issuer: "サーティファイ 情報処理能力検定",
+    issueDate: "2025",
+    badgeUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
+    verificationUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
+  },
+  {
+    title: "Microsoft Azure Fundamentals",
+    issuer: "Microsoft",
+    issueDate: "2024",
+    badgeUrl: "https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
+    verificationUrl: "https://www.credly.com/badges/example",
+  },
+  // 必要に応じて資格を追加
+];
+
 export function Skills() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -160,11 +180,13 @@ export function Skills() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl text-center mb-16">
-            Skills
+            スキルと専門知識
           </h2>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          
+          {/* スキルグリッド */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-16">
             {skillCategories.map((category, index) => (
-              <Card key={index} className="overflow-hidden">
+              <Card key={index}>
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400">
@@ -197,6 +219,51 @@ export function Skills() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* 資格セクション */}
+          <div className="mt-24">
+            <div className="flex items-center justify-center gap-3 mb-12">
+              <Award className="h-8 w-8 text-green-600 dark:text-green-400" />
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                資格＆認定
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {certifications.map((cert, index) => (
+                <motion.a
+                  key={index}
+                  href={cert.verificationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <CardContent className="p-6">
+                      <div className="relative w-full aspect-square mb-4">
+                        <Image
+                          src={cert.badgeUrl}
+                          alt={cert.title}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                        {cert.title}
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {cert.issuer}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-500">
+                        Issued {cert.issueDate}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.a>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
