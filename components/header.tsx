@@ -137,7 +137,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-          <motion.div
+            <motion.div
               initial={false}
               animate={mobileMenuOpen ? "open" : "closed"}
             >
@@ -168,7 +168,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* モバイルメニュー */}
+      {/* モバイルメニュー - インラインスタイルを使用した全画面表示 */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -176,7 +176,7 @@ export function Header() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-51 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
+            className="fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
           >
             <div className="flex items-center justify-between p-6">
               <Link
