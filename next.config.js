@@ -4,16 +4,23 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { 
+ images: {
     unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'images.pexels.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.unsplash.com',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'www.openbadge-global.com',
+        pathname: '/api/v1/image/**',
       }
     ]
   },

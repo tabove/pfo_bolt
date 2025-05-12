@@ -147,10 +147,9 @@ const certifications = [
     title: "Javaプログラミング能力認定試験 2級",
     issuer: "サーティファイ 情報処理能力検定",
     issueDate: "2025",
-    imageUrl: "https://www.openbadge-global.com/api/v1/image/assertion/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
+    imageUrl: "/images/java-certification.png", // ローカルの画像を使用
     badgeUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
   },
-  // 必要に応じて資格を追加
 ];
 
 export function Skills() {
@@ -234,14 +233,18 @@ export function Skills() {
                 >
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="p-6">
-                      <div className="relative w-full aspect-square mb-4 rounded-lg overflow-hidden">
-                      <Image
-                           src={cert.imageUrl}
-                           alt={cert.title}
-                           width={340}
-                           height={340}
-                           className="object-contain transform group-hover:scale-105 transition-transform duration-300"
-                        />
+                     <div className="relative w-full aspect-square mb-4 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        {cert.imageUrl ? (
+                          <Image
+                            src={cert.imageUrl}
+                            alt={cert.title}
+                            width={200}
+                            height={200}
+                            className="object-contain"
+                          />
+                        ) : (
+                          <Award className="h-16 w-16 text-gray-400" />
+                        )}
                       </div>
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                         {cert.title}
