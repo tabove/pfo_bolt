@@ -132,7 +132,7 @@ const skillCategories = [
       {
         name: "クラウドサービス",
         details: [
-          "AWS主要サービス(Azure、DynamoDB,S3、Lambda)",
+          "AWS主要サービス(EC2,DynamoDB,S3、Lambda)",
           "サーバーレスアーキテクチャ",
           "クラウドセキュリティ",
           "Infrastructure as Code",
