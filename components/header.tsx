@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
 
 // トップページ用のアンカーリンク
 const topNavigation = [
@@ -15,37 +14,6 @@ const topNavigation = [
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
 ];
-
-const menuVariants = {
-  closed: {
-    opacity: 0,
-    x: "100%",
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  open: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const menuItemVariants = {
-  closed: { x: 50, opacity: 0 },
-  open: (i: number) => ({
-    x: 0,
-    opacity: 1,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.3,
-    },
-  }),
-};
 
 {/* ヘッダーメニュー  */}
 export function Header() {
@@ -79,6 +47,7 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    // モバイルメニューの開閉状態に応じてスクロールをロック/解除
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
@@ -99,7 +68,7 @@ export function Header() {
       // トップページに移動してからハッシュにスクロール
       router.push("/");
       
-      // ページ遷移後にスクロール処理を行うために少し遅延させる
+      // ページ遷移後にスクロール処理を行うための遅延
       setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
@@ -118,7 +87,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
+        "fixed top-0 w-full z-40 transition-all duration-300",
         isScrolled
           ? "bg-white/80 backdrop-blur-md shadow-sm dark:bg-gray-900/80"
           : "bg-transparent"
@@ -137,16 +106,11 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            <motion.div
-              initial={false}
-              animate={mobileMenuOpen ? "open" : "closed"}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </motion.div>
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
           </Button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
@@ -168,62 +132,69 @@ export function Header() {
         </div>
       </nav>
 
-      {/* モバイルメニュー - インラインスタイルを使用した全画面表示 */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
-          >
-            <div className="flex items-center justify-between p-6">
-              <Link
-                href="/"
-                className="-m-1.5 p-1.5 text-2xl font-bold text-green-600"
-                onClick={closeMenu}
+      {/* モバイルメニュー */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col"
+          style={{ 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden'
+          }}
+        >
+          <div className="flex items-center justify-between p-6">
+            <Link
+              href="/"
+              className="-m-1.5 p-1.5 text-2xl font-bold text-green-600"
+              onClick={closeMenu}
+            >
+              TH
+            </Link>
+            <Button
+              variant="ghost"
+              className="-m-2.5 rounded-md p-2.5"
+              onClick={closeMenu}
+            >
+              <span className="sr-only">Close menu</span>
+              <X className="h-6 w-6" aria-hidden="true" />
+            </Button>
+          </div>
+          
+          <div className="flex flex-col items-center justify-center flex-1 py-8">
+            {navigation.map((item, i) => (
+              <div
+                key={item.name}
+                className="w-full max-w-md"
+                style={{
+                  opacity: 1,
+                  transform: 'translateX(0)'
+                }}
               >
-                TH
-              </Link>
-              <Button
-                variant="ghost"
-                className="-m-2.5 rounded-md p-2.5"
-                onClick={closeMenu}
-              >
-                <span className="sr-only">Close menu</span>
-                <X className="h-6 w-6" aria-hidden="true" />
-              </Button>
-            </div>
-            <div className="flex flex-col items-center justify-center flex-1 py-8">
-              {navigation.map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  custom={i}
-                  variants={menuItemVariants}
-                  className="w-full max-w-md"
+                <Link
+                  href={item.href}
+                  className="w-full text-center text-xl py-4 px-6 my-2 font-semibold transition-colors duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group flex items-center justify-center gap-2"
+                  onClick={(e) => {
+                    if (!isTopPage && item.href.includes('#')) {
+                      e.preventDefault();
+                      handleNavClick(`/${item.href}`);
+                    } else {
+                      closeMenu();
+                    }
+                  }}
                 >
-                  <Link
-                    href={item.href}
-                    className="w-full text-center text-xl py-4 px-6 my-2 font-semibold transition-colors duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group flex items-center justify-center gap-2"
-                    onClick={(e) => {
-                      if (!isTopPage && item.href.includes('#')) {
-                        e.preventDefault();
-                        handleNavClick(`/${item.href}`);
-                      } else {
-                        closeMenu();
-                      }
-                    }}
-                  >
-                    <span className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">•</span>
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <span className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                  {item.name}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
