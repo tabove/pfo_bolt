@@ -168,7 +168,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* モバイルメニュー - Tailwindクラスを使用した全画面表示 */}
+      {/* モバイルメニュー */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -176,9 +176,9 @@ export function Header() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="mobile-menu-fullscreen"
+            className="fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
           >
-            <div className="mobile-menu-header">
+            <div className="flex items-center justify-between p-6">
               <Link
                 href="/"
                 className="-m-1.5 p-1.5 text-2xl font-bold text-green-600"
@@ -195,7 +195,7 @@ export function Header() {
                 <X className="h-6 w-6" aria-hidden="true" />
               </Button>
             </div>
-            <div className="mobile-menu-content">
+            <div className="flex flex-col items-center justify-center flex-1 py-8">
               {navigation.map((item, i) => (
                 <motion.div
                   key={item.name}
@@ -205,7 +205,7 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="mobile-menu-item group flex items-center justify-center gap-2"
+                    className="w-full text-center text-xl py-4 px-6 my-2 font-semibold transition-colors duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group flex items-center justify-center gap-2"
                     onClick={(e) => {
                       if (!isTopPage && item.href.includes('#')) {
                         e.preventDefault();
@@ -215,7 +215,7 @@ export function Header() {
                       }
                     }}
                   >
-                    <span className="mobile-menu-icon">•</span>
+                    <span className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">•</span>
                     {item.name}
                   </Link>
                 </motion.div>
