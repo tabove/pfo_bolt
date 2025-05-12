@@ -18,7 +18,7 @@ const projects = [
         liveUrl: "https://portfolio-tabove.vercel.app/",
     },
     {
-        title: "在庫管理システム(仮)",
+        title: "在庫管理システム※調整中",
         description: "webアプリケーションを使用した基本的な在庫管理システム",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
         tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
@@ -26,7 +26,7 @@ const projects = [
         liveUrl: "https://project-one.com",
     },
     {
-        title: "Movie Compass(ムビコン)",
+        title: "Movie Compass",
         description: "スクールでのチーム開発、今観たいを叶える映画情報検索アプリケーション",
         image: "/moviecompass.png",
         tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
