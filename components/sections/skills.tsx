@@ -147,7 +147,7 @@ const certifications = [
     title: "Javaプログラミング能力認定試験 2級",
     issuer: "サーティファイ 情報処理能力検定",
     issueDate: "2025",
-    imageUrl: "/images/java-certification.png", // ローカルの画像を使用
+    imageUrl: "/java-certification.png",
     badgeUrl: "https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/cVRwaGdlRG0xVis1Y3RJbGhhelJQdz09",
   },
 ];
