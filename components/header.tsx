@@ -176,7 +176,7 @@ export function Header() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
+            className="fixed inset-0 z-51 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden"
           >
             <div className="flex items-center justify-between p-6">
               <Link
