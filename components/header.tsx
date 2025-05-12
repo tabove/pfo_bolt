@@ -135,17 +135,9 @@ export function Header() {
       {/* モバイルメニュー */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col"
-          style={{ 
-            top: 0, 
-            left: 0, 
-            right: 0, 
-            bottom: 0, 
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden'
-          }}
+          className="fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col overflow-hidden"
+          aria-modal="true"
+          role="dialog"
         >
           <div className="flex items-center justify-between p-6">
             <Link
@@ -165,15 +157,11 @@ export function Header() {
             </Button>
           </div>
           
-          <div className="flex flex-col items-center justify-center flex-1 py-8">
-            {navigation.map((item, i) => (
+          <div className="flex flex-col items-center justify-center flex-1 py-8 overflow-y-auto">
+            {navigation.map((item) => (
               <div
                 key={item.name}
                 className="w-full max-w-md"
-                style={{
-                  opacity: 1,
-                  transform: 'translateX(0)'
-                }}
               >
                 <Link
                   href={item.href}
