@@ -81,8 +81,10 @@ export function Header() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
   }, [mobileMenuOpen]);
 
@@ -166,7 +168,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* モバイルメニュー  */}
+      {/* モバイルメニュー - Tailwindクラスを使用した全画面表示 */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -174,9 +176,9 @@ export function Header() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900"
+            className="mobile-menu-fullscreen"
           >
-            <div className="flex items-center justify-between">
+            <div className="mobile-menu-header">
               <Link
                 href="/"
                 className="-m-1.5 p-1.5 text-2xl font-bold text-green-600"
@@ -193,36 +195,31 @@ export function Header() {
                 <X className="h-6 w-6" aria-hidden="true" />
               </Button>
             </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item, i) => (
-                    <motion.div
-                      key={item.name}
-                      custom={i}
-                      variants={menuItemVariants}
-                    >
-                      <Link
-                        href={item.href}
-                        className="group -mx-3 flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
-                        onClick={(e) => {
-                          if (!isTopPage && item.href.includes('#')) {
-                            e.preventDefault();
-                            handleNavClick(`/${item.href}`);
-                          } else {
-                            closeMenu();
-                          }
-                        }}
-                      >
-                        <span className="text-green-600 opacity-0 transition-opacity group-hover:opacity-100">
-                          •
-                        </span>
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+            <div className="mobile-menu-content">
+              {navigation.map((item, i) => (
+                <motion.div
+                  key={item.name}
+                  custom={i}
+                  variants={menuItemVariants}
+                  className="w-full max-w-md"
+                >
+                  <Link
+                    href={item.href}
+                    className="mobile-menu-item group flex items-center justify-center gap-2"
+                    onClick={(e) => {
+                      if (!isTopPage && item.href.includes('#')) {
+                        e.preventDefault();
+                        handleNavClick(`/${item.href}`);
+                      } else {
+                        closeMenu();
+                      }
+                    }}
+                  >
+                    <span className="mobile-menu-icon">•</span>
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         )}
