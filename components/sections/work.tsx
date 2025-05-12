@@ -26,12 +26,12 @@ const projects = [
         liveUrl: "https://project-one.com",
     },
     {
-        title: "Movie Compass(ムビコン)※鋭意制作中",
-        description: "スクールチーム制作、今観たいを叶える映画情報検索アプリケーション",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+        title: "Movie Compass(ムビコン)",
+        description: "スクールでのチーム開発、今観たいを叶える映画情報検索アプリケーション",
+        image: "/moviecompass.png",
         tags: ["Java", "JavaScript", "Servlet/jsp", "html/css"],
         githubUrl: "https://github.com/tabove/moviecompass.git",
-        liveUrl: "https://project-three.com",
+        liveUrl: "https://github.com/tabove/moviecompass.git",
       },
     ];
     
