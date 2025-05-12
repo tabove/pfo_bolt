@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navigation = [
+// トップページ用のアンカーリンク
+const topNavigation = [
   { name: "About", href: "#about" },
   { name: "Work", href: "#work" },
   { name: "Skills", href: "#skills" },
@@ -49,6 +51,24 @@ const menuItemVariants = {
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const pathname = usePathname();
+  const router = useRouter();
+  const isTopPage = pathname === "/";
+
+  // 現在のパスに基づいてナビゲーションリンクを設定
+  const navigation = topNavigation.map(item => {
+    if (isTopPage) {
+      // トップページではそのままハッシュリンクを使用
+      return item;
+    } else {
+      // トップページ以外では、トップページへ戻ってからハッシュへジャンプ
+      return {
+        ...item,
+        href: `/${item.href}`,
+      };
+    }
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,6 +85,29 @@ export function Header() {
       document.body.style.overflow = "unset";
     }
   }, [mobileMenuOpen]);
+
+  // ナビゲーションリンクをクリックしたときの処理
+  const handleNavClick = (href: string) => {
+    closeMenu();
+
+    // トップページ以外からのリンクの場合
+    if (!isTopPage && href.startsWith('/#')) {
+      // ハッシュを取得
+      const hash = href.substring(1);
+      // トップページに移動してからハッシュにスクロール
+      router.push("/");
+      
+      // ページ遷移後にスクロール処理を行うために少し遅延させる
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      
+      return;
+    }
+  };
 
   const closeMenu = () => {
     setMobileMenuOpen(false);
@@ -110,6 +153,12 @@ export function Header() {
               key={item.name}
               href={item.href}
               className="text-sm font-semibold leading-6 text-gray-900 hover:text-green-600 dark:text-gray-100 dark:hover:text-green-400 transition-colors duration-200"
+              onClick={(e) => {
+                if (!isTopPage && item.href.includes('#')) {
+                  e.preventDefault();
+                  handleNavClick(`/${item.href}`);
+                }
+              }}
             >
               {item.name}
             </Link>
@@ -156,7 +205,14 @@ export function Header() {
                       <Link
                         href={item.href}
                         className="group -mx-3 flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
-                        onClick={closeMenu}
+                        onClick={(e) => {
+                          if (!isTopPage && item.href.includes('#')) {
+                            e.preventDefault();
+                            handleNavClick(`/${item.href}`);
+                          } else {
+                            closeMenu();
+                          }
+                        }}
                       >
                         <span className="text-green-600 opacity-0 transition-opacity group-hover:opacity-100">
                           •
