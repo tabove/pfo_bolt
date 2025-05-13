@@ -19,6 +19,8 @@ const topNavigation = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasRestoredPosition, setHasRestoredPosition] = useState(false);
+  const savedScrollPosition = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   
   const pathname = usePathname();
@@ -39,6 +41,38 @@ export function Header() {
     }
   });
 
+  // ページロード時のスクロール位置復元を制御するuseEffect
+  useEffect(() => {
+    // スクロール位置を復元する前にフラグをチェック
+    if (!hasRestoredPosition) {
+      // sessionStorage からスクロール位置を取得
+      const savedPosition = sessionStorage.getItem('scrollPosition');
+      
+      if (savedPosition !== null) {
+        // 少し遅延させてDOM構築後にスクロール
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedPosition));
+          setHasRestoredPosition(true);
+        }, 100);
+      } else {
+        setHasRestoredPosition(true);
+      }
+    }
+    
+    // ページを離れる前にスクロール位置を保存
+    const handleBeforeUnload = () => {
+      // モバイルメニューが開いている場合は保存しない
+      if (!mobileMenuOpen) {
+        sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+      }
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasRestoredPosition, mobileMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -56,14 +90,29 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isTopPage]);
 
+  // モバイルメニューuseEffect
   useEffect(() => {
-    // モバイルメニューの開閉状態に応じてスクロールをロック/解除
     if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+      // メニューを開く前に現在のスクロール位置を保存
+      savedScrollPosition.current = window.scrollY;
+      
+      // スクロールをロック
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollPosition.current}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      // スクロールロックを解除
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      
+      // 保存したスクロール位置に戻る（メニューが閉じられた場合のみ）
+      if (savedScrollPosition.current > 0) {
+        window.scrollTo(0, savedScrollPosition.current);
+        savedScrollPosition.current = 0;
+      }
     }
   }, [mobileMenuOpen]);
 
@@ -84,6 +133,10 @@ export function Header() {
 
   // ナビゲーションリンクをクリックしたときの処理
   const handleNavClick = (href: string) => {
+    // 現在のスクロール位置を一時的に消去
+    // これによりページ間移動時に誤った位置が保存されるのを防ぐ
+    sessionStorage.removeItem('scrollPosition');
+    
     closeMenu();
 
     // トップページ以外からのリンクの場合
@@ -96,12 +149,14 @@ export function Header() {
       // ページ遷移後にスクロール処理を行うための遅延
       setTimeout(() => {
         scrollToSection(hash);
-      }, 100);
+      }, 200); // 少し長めの遅延を設定
       
       return;
     } else if (isTopPage && href.startsWith('#')) {
       // トップページでのアンカーリンクの場合
-      scrollToSection(href);
+      setTimeout(() => {
+        scrollToSection(href);
+      }, 50); // 短い遅延でUIの応答性を維持
       return;
     }
   };
@@ -169,6 +224,7 @@ export function Header() {
           className="mobile-menu-fullscreen"
           aria-modal="true"
           role="dialog"
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50 }}
         >
           <div className="mobile-menu-header">
             <Link
@@ -192,7 +248,7 @@ export function Header() {
             {navigation.map((item) => (
               <div
                 key={item.name}
-                className="w-full max-w-md"
+                className="w-full max-w-md my-2"
               >
                 <Link
                   href={item.href}
@@ -200,11 +256,15 @@ export function Header() {
                   onClick={(e) => {
                     if (item.href.includes('#')) {
                       e.preventDefault();
-                      if (!isTopPage) {
-                        handleNavClick(`/${item.href}`);
-                      } else {
-                        handleNavClick(item.href);
-                      }
+                      closeMenu(); // 先にメニューを閉じる
+                      // setTimeout を使って、メニューが閉じた後にナビゲーションを実行
+                      setTimeout(() => {
+                        if (!isTopPage) {
+                          router.push(`/${item.href}`);
+                        } else {
+                          scrollToSection(item.href);
+                        }
+                      }, 100);
                     } else {
                       closeMenu();
                     }

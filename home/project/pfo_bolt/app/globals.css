@@ -73,18 +73,25 @@
       transform: translateY(0);
     }
 
-    /* モバイルメニュー全画面表示用スタイル */
+   /* モバイルメニュー全画面表示用スタイル */
 @layer components {
   .mobile-menu-fullscreen {
-    @apply fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden;
+    @apply fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-y-auto;
+    /* overflow-hiddenからoverflow-y-autoに変更することで、コンテンツが多い場合にスクロール可能に */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   .mobile-menu-header {
-    @apply flex items-center justify-between p-6;
+    @apply flex items-center justify-between p-6 sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm;
+    /* stickyにすることでスクロール時もヘッダーが見えるように */
   }
 
   .mobile-menu-content {
-    @apply flex flex-col items-center justify-center flex-1 py-8 overflow-y-auto;
+    @apply flex flex-col items-center justify-start flex-1 py-8 w-full;
+    /* justify-centerをjustify-startに変更 */
   }
 
   .mobile-menu-item {
@@ -95,6 +102,7 @@
     @apply text-green-600 opacity-0 group-hover:opacity-100 transition-opacity;
   }
 
+  /* アニメーション*/
   .mobile-menu-enter {
     @apply opacity-0 translate-x-full;
   }
