@@ -11,7 +11,7 @@
         --popover: 0 0% 100%;
         --popover-foreground: 240 10% 3.9%;
         --primary: 142 76% 36%;
-        --primary-foreground: 355.7 100% 97.3%;  /* 修正: primay → primary */
+        --primay-foreground: 355.7 100% 97.3%;
         --secondary: 240 4.8% 95.9%;
         --secondary-foreground: 240 5.9% 10%;
         --muted: 240 4.8% 95.9%;
@@ -56,6 +56,10 @@
       body {
         @apply bg-background text-foreground;
       }
+      /* アンカーリンクのスクロールマージンを追加 */
+      section[id] {
+        @apply scroll-mt-24;
+      }
     }
     
     .section-fade-up {
@@ -68,3 +72,42 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* モバイルメニュー全画面表示用スタイル */
+@layer components {
+  .mobile-menu-fullscreen {
+    @apply fixed inset-0 z-50 flex flex-col w-full h-full bg-white dark:bg-gray-900 overflow-hidden;
+  }
+
+  .mobile-menu-header {
+    @apply flex items-center justify-between p-6;
+  }
+
+  .mobile-menu-content {
+    @apply flex flex-col items-center justify-center flex-1 py-8 overflow-y-auto;
+  }
+
+  .mobile-menu-item {
+    @apply w-full text-center text-xl py-4 px-6 my-2 font-semibold transition-colors duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg;
+  }
+
+  .mobile-menu-icon {
+    @apply text-green-600 opacity-0 group-hover:opacity-100 transition-opacity;
+  }
+
+  .mobile-menu-enter {
+    @apply opacity-0 translate-x-full;
+  }
+
+  .mobile-menu-enter-active {
+    @apply opacity-100 translate-x-0 transition-all duration-300 ease-in-out;
+  }
+
+  .mobile-menu-exit {
+    @apply opacity-100 translate-x-0;
+  }
+
+  .mobile-menu-exit-active {
+    @apply opacity-0 translate-x-full transition-all duration-200 ease-in-out;
+  }
+}

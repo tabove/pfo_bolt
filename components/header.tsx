@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ const topNavigation = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   
   const pathname = usePathname();
   const router = useRouter();
@@ -43,8 +44,17 @@ export function Header() {
       setIsScrolled(window.scrollY > 0);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    // 初期ロード時にハッシュがある場合の処理
+    if (isTopPage && window.location.hash) {
+      setTimeout(() => {
+        const id = window.location.hash.substring(1);
+        scrollToSection(`#${id}`);
+      }, 100);
+    }
+    
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isTopPage]);
 
   useEffect(() => {
     // モバイルメニューの開閉状態に応じてスクロールをロック/解除
@@ -56,6 +66,21 @@ export function Header() {
       document.documentElement.style.overflow = "";
     }
   }, [mobileMenuOpen]);
+
+  // セクションへのスクロール処理
+  const scrollToSection = (selector: string) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      const headerHeight = headerRef.current?.offsetHeight || 0;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20; // 余白も追加
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   // ナビゲーションリンクをクリックしたときの処理
   const handleNavClick = (href: string) => {
@@ -70,12 +95,13 @@ export function Header() {
       
       // ページ遷移後にスクロール処理を行うための遅延
       setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        scrollToSection(hash);
       }, 100);
       
+      return;
+    } else if (isTopPage && href.startsWith('#')) {
+      // トップページでのアンカーリンクの場合
+      scrollToSection(href);
       return;
     }
   };
@@ -86,6 +112,7 @@ export function Header() {
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "fixed top-0 w-full z-40 transition-all duration-300",
         isScrolled
@@ -120,9 +147,13 @@ export function Header() {
               href={item.href}
               className="text-sm font-semibold leading-6 text-gray-900 hover:text-green-600 dark:text-gray-100 dark:hover:text-green-400 transition-colors duration-200"
               onClick={(e) => {
-                if (!isTopPage && item.href.includes('#')) {
+                if (item.href.includes('#')) {
                   e.preventDefault();
-                  handleNavClick(`/${item.href}`);
+                  if (!isTopPage) {
+                    handleNavClick(`/${item.href}`);
+                  } else {
+                    handleNavClick(item.href);
+                  }
                 }
               }}
             >
@@ -135,11 +166,11 @@ export function Header() {
       {/* モバイルメニュー */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col overflow-hidden"
+          className="mobile-menu-fullscreen"
           aria-modal="true"
           role="dialog"
         >
-          <div className="flex items-center justify-between p-6">
+          <div className="mobile-menu-header">
             <Link
               href="/"
               className="-m-1.5 p-1.5 text-2xl font-bold text-green-600"
@@ -157,7 +188,7 @@ export function Header() {
             </Button>
           </div>
           
-          <div className="flex flex-col items-center justify-center flex-1 py-8 overflow-y-auto">
+          <div className="mobile-menu-content">
             {navigation.map((item) => (
               <div
                 key={item.name}
@@ -165,17 +196,21 @@ export function Header() {
               >
                 <Link
                   href={item.href}
-                  className="w-full text-center text-xl py-4 px-6 my-2 font-semibold transition-colors duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group flex items-center justify-center gap-2"
+                  className="mobile-menu-item group flex items-center justify-center gap-2"
                   onClick={(e) => {
-                    if (!isTopPage && item.href.includes('#')) {
+                    if (item.href.includes('#')) {
                       e.preventDefault();
-                      handleNavClick(`/${item.href}`);
+                      if (!isTopPage) {
+                        handleNavClick(`/${item.href}`);
+                      } else {
+                        handleNavClick(item.href);
+                      }
                     } else {
                       closeMenu();
                     }
                   }}
                 >
-                  <span className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                  <span className="mobile-menu-icon">•</span>
                   {item.name}
                 </Link>
               </div>
